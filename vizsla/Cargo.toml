@@ -1,0 +1,14 @@
+[package]
+name = "vizsla"
+version = "0.1.0"
+authors = ["Chris Clarizio christopher.a.clarizio@gmail.com"]
+description = ""
+license = "MIT/Apache-2.0"
+repository = "https://github.com/christopherclarizio/vizsla"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
