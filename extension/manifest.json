@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Vizsla",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "Adds vim-based keybindings to the browser.",
     "author": "Chris Clarizio <christopher.a.clarizio@gmail.com>",
     "icons": {
