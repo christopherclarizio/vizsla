@@ -11,10 +11,7 @@
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
-        "js": [
-          "content_scripts/main.js",
-          "content_scripts/vizsla.js"
-        ]
+        "js": ["content_scripts/main.js"]
       }
     ],
     "options_ui": {
