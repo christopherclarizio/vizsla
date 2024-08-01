@@ -1,9 +1,15 @@
-console.log("[vizsla] WebExtension loaded");
+const { greet } = wasm_bindgen;
 
-document.body.style.border = "5px solid green";
+async function run() {
+    console.log("[vizsla] loading WebExtension");
 
-// import init, { greet } from "./vizsla/pkg/vizsla.js";
-//       init().then(() => {
-//         greet("Vizsla");
-//       });
+    document.body.style.border = "5px solid green";
 
+    console.log(browser.runtime.getURL('vizsla.js'))
+
+    await wasm_bindgen();
+
+    greet("hello from WebExtension");
+}
+
+run();
