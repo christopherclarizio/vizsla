@@ -8,13 +8,18 @@ const import_and_init_wasm_wrapper_module = async (module_url) => {
 }
 
 const main = async () => {
-    console.debug("[vizsla] content_scripts/main.js started");
+    console.debug("[vizsla] started main content script");
 
     const vizsla_module_url = browser.runtime.getURL(VIZSLA_REL_PATH);
-    vizsla = await import_and_init_wasm_wrapper_module(vizsla_module_url);
-    console.debug('[vizsla] wasm wrapper module loaded and initialized');
+    import_and_init_wasm_wrapper_module(vizsla_module_url)
+        .then(vizsla => {
+            console.debug('[vizsla] loaded and initialized wasm wrapper module');        
 
-    console.debug(`[vizsla] running Wasm module: vizsla.add(1, 2) = ${vizsla.add(1, 2)}`);
+            console.debug(`[vizsla] ran wasm: vizsla.add(1, 2) = ${vizsla.add(1, 2)}`);
+        })
+        .catch(error => {
+            console.error(`[vizsla] failed to load and initialize wasm wrapper module: ${error}`);
+        })
 }
 
 main();
