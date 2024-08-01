@@ -2,9 +2,8 @@
 VIZSLA_REL_PATH = 'vizsla/pkg/vizsla.js';
 
 const import_and_init_wasm_wrapper_module = async (module_url) => {
-    const {default: init} = await import(module_url);
-
-    return init();
+    console.debug('[vizsla] attempting to load wasm wrapper module');
+    return import(module_url).then(({default: init}) => init());
 }
 
 const main = async () => {
