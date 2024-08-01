@@ -12,6 +12,12 @@
     ],
     "options_ui": {
         "page": "options/options.html"
-    }
+    },
+    "web_accessible_resources": [
+      {
+        "resources": ["vizsla/pkg/vizsla.js", "vizsla/pkg/vizsla_bg.wasm"],
+        "matches": ["<all_urls>"]
+      }
+    ]
   }
   
