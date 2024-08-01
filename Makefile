@@ -4,11 +4,19 @@ NATIVE_EXT_SRC = $(shell find extension -type f)
 
 BUILT_NATIVE_EXT_SRC = $(patsubst extension/%, build/extension/%, $(NATIVE_EXT_SRC))
 
+WASM_EXT_SRC = $(wildcard vizsla/src/*) vizsla/Cargo.lock vizsla/Cargo.toml
+
+wasm_ext_src_built: $(WASM_EXT_SRC)
+	wasm-pack build vizsla --target web --no-typescript --out-dir target/wasm/
+	mkdir -p build/extension/wasm
+	cp vizsla/target/wasm/vizsla_bg.wasm build/extension/wasm/vizsla_bg.wasm
+	cp vizsla/target/wasm/vizsla.js build/extension/wasm/vizsla.js
+
 build/extension/%/: extension/%
 	mkdir -p $(@D)
 	cp $< $@
 
-build/vizsla.zip: $(BUILT_NATIVE_EXT_SRC)
+build/vizsla.zip: $(BUILT_NATIVE_EXT_SRC) wasm_ext_src_built
 	@echo "bundling into zipped extension"
 
 .PHONY: release

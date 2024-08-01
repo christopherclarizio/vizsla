@@ -1,5 +1,5 @@
 // the relative path from the WebExtension manifest.json file to the module
-VIZSLA_REL_PATH = 'vizsla/pkg/vizsla.js';
+VIZSLA_REL_PATH = 'wasm/vizsla.js';
 
 const import_and_init_wasm_wrapper_module = async (module_url) => {
     console.debug('[vizsla] attempting to load wasm wrapper module');

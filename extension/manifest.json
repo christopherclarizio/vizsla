@@ -15,7 +15,7 @@
     },
     "web_accessible_resources": [
       {
-        "resources": ["vizsla/pkg/vizsla.js", "vizsla/pkg/vizsla_bg.wasm"],
+        "resources": ["wasm/vizsla.js", "wasm/vizsla_bg.wasm"],
         "matches": ["<all_urls>"]
       }
     ]
