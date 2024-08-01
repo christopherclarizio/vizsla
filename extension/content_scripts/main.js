@@ -1,27 +1,20 @@
-console.log("[vizsla] content_scripts/main.js loaded");
+// the relative path from the WebExtension manifest.json file to the module
+VIZSLA_REL_PATH = 'vizsla/pkg/vizsla.js';
 
-document.body.style.border = "5px solid green";
+const import_and_init_wasm_wrapper_module = async (module_url) => {
+    const {default: init} = await import(module_url);
 
-const WASM_MOD_URL = chrome.runtime.getURL('vizsla/pkg/vizsla.js');
+    return init();
+}
 
-// Import Wasm module binding using dynamic import
-// "init" may fail if the current site CSP restricts the use of Wasm (e.g. any github.com page)
-// In this case instantiate module in the background worker (see background.js) and use message passing
-const loadWasmModule = async () => {
-    const { default: init, add } = await import(WASM_MOD_URL);
+const main = async () => {
+    console.debug("[vizsla] content_scripts/main.js started");
 
-    return init().catch(() => null);
-};
+    const vizsla_module_url = browser.runtime.getURL(VIZSLA_REL_PATH);
+    vizsla = await import_and_init_wasm_wrapper_module(vizsla_module_url);
+    console.debug('[vizsla] wasm wrapper module loaded and initialized');
 
+    console.debug(`[vizsla] running Wasm module: vizsla.add(1, 2) = ${vizsla.add(1, 2)}`);
+}
 
-(async () => {
-    const vizsla = await loadWasmModule();
-
-    // If the module is successfully initialized,
-    // import entities from the module
-    if (vizsla) {
-        console.log("[vizsla] Wasm module loaded");
-
-        console.log(`[vizsla] Running Wasm module: vizsla.add(1, 2) = ${vizsla.add(1, 2)}`);
-    }
-})();
+main();
