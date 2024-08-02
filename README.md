@@ -1,9 +1,12 @@
 # vizsla
 
-```zsh
-# build package with wasm-pack
-wasm-pack build --target web --no-typescript
+```sh
+# make commands
+make
 
-# serve index
+make clean
+
+# serve test index (to test lib independently)
+cd vizsla && \
 python3 -m http.server
 ```
