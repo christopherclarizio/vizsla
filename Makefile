@@ -7,10 +7,11 @@ BUILT_NATIVE_EXT_SRC = $(patsubst extension/%, build/extension/%, $(NATIVE_EXT_S
 WASM_EXT_SRC = $(wildcard vizsla/src/*) vizsla/Cargo.lock vizsla/Cargo.toml
 
 wasm_ext_src_built: $(WASM_EXT_SRC)
-	wasm-pack build vizsla --target web --no-typescript --out-dir target/wasm/
+	mkdir -p build/wasm-pack
+	wasm-pack build vizsla --target web --no-typescript --out-dir $(shell pwd)/build/wasm-pack
 	mkdir -p build/extension/wasm
-	cp vizsla/target/wasm/vizsla_bg.wasm build/extension/wasm/vizsla_bg.wasm
-	cp vizsla/target/wasm/vizsla.js build/extension/wasm/vizsla.js
+	cp build/wasm-pack/vizsla_bg.wasm build/extension/wasm/vizsla_bg.wasm
+	cp build/wasm-pack/vizsla.js build/extension/wasm/vizsla.js
 
 build/extension/%/: extension/%
 	mkdir -p $(@D)
