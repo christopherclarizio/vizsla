@@ -19,6 +19,7 @@ features = [
   'CssStyleDeclaration',
   'Document',
   'Element',
+  'Event',
   'HtmlElement',
   'Node',
   'Window',
